@@ -259,6 +259,682 @@
             "$ref": "#/components/schemas/bulletedListItemBlockRequest"
           }
         ]
+      },
+      "blockColor": {
+        "description": "The color of the block text or background. Append '_background' for background color.",
+        "type": "string",
+        "enum": [
+          "default", "gray", "brown", "orange", "yellow", "green", "blue",
+          "purple", "pink", "red",
+          "default_background", "gray_background", "brown_background",
+          "orange_background", "yellow_background", "green_background",
+          "blue_background", "purple_background", "pink_background",
+          "red_background"
+        ]
+      },
+      "blockIcon": {
+        "description": "An emoji or external-URL icon for a block.",
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "Emoji icon.",
+            "properties": {
+              "type": { "type": "string", "const": "emoji" },
+              "emoji": { "type": "string", "description": "A single emoji character." }
+            },
+            "required": ["type", "emoji"],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "description": "External-URL icon.",
+            "properties": {
+              "type": { "type": "string", "const": "external" },
+              "external": {
+                "type": "object",
+                "properties": { "url": { "type": "string" } },
+                "required": ["url"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["type", "external"],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "blockExternalUrl": {
+        "description": "An external file reference (for media blocks).",
+        "type": "object",
+        "properties": {
+          "url": { "type": "string", "description": "Publicly accessible URL of the media." }
+        },
+        "required": ["url"],
+        "additionalProperties": false
+      },
+      "updateParagraphBlockRequest": {
+        "description": "Update a paragraph block. Provide updated rich_text and/or color. Set archived to true/false to trash/restore.",
+        "type": "object",
+        "properties": {
+          "paragraph": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["paragraph"],
+        "additionalProperties": false
+      },
+      "updateHeading1BlockRequest": {
+        "description": "Update a heading_1 block.",
+        "type": "object",
+        "properties": {
+          "heading_1": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" },
+              "is_toggleable": {
+                "type": "boolean",
+                "description": "When true the heading can be toggled to show/hide children."
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["heading_1"],
+        "additionalProperties": false
+      },
+      "updateHeading2BlockRequest": {
+        "description": "Update a heading_2 block.",
+        "type": "object",
+        "properties": {
+          "heading_2": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" },
+              "is_toggleable": {
+                "type": "boolean",
+                "description": "When true the heading can be toggled to show/hide children."
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["heading_2"],
+        "additionalProperties": false
+      },
+      "updateHeading3BlockRequest": {
+        "description": "Update a heading_3 block.",
+        "type": "object",
+        "properties": {
+          "heading_3": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" },
+              "is_toggleable": {
+                "type": "boolean",
+                "description": "When true the heading can be toggled to show/hide children."
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["heading_3"],
+        "additionalProperties": false
+      },
+      "updateHeading4BlockRequest": {
+        "description": "Update a heading_4 block.",
+        "type": "object",
+        "properties": {
+          "heading_4": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" },
+              "is_toggleable": {
+                "type": "boolean",
+                "description": "When true the heading can be toggled to show/hide children."
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["heading_4"],
+        "additionalProperties": false
+      },
+      "updateBulletedListItemBlockRequest": {
+        "description": "Update a bulleted_list_item block.",
+        "type": "object",
+        "properties": {
+          "bulleted_list_item": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["bulleted_list_item"],
+        "additionalProperties": false
+      },
+      "updateNumberedListItemBlockRequest": {
+        "description": "Update a numbered_list_item block.",
+        "type": "object",
+        "properties": {
+          "numbered_list_item": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["numbered_list_item"],
+        "additionalProperties": false
+      },
+      "updateToDoBlockRequest": {
+        "description": "Update a to_do block.",
+        "type": "object",
+        "properties": {
+          "to_do": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "checked": {
+                "type": "boolean",
+                "description": "Whether the to-do is checked."
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["to_do"],
+        "additionalProperties": false
+      },
+      "updateToggleBlockRequest": {
+        "description": "Update a toggle block.",
+        "type": "object",
+        "properties": {
+          "toggle": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["toggle"],
+        "additionalProperties": false
+      },
+      "updateCodeBlockRequest": {
+        "description": "Update a code block.",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "language": {
+                "type": "string",
+                "description": "The programming language of the code block.",
+                "enum": [
+                  "abap", "arduino", "bash", "basic", "c", "clojure", "coffeescript",
+                  "c++", "c#", "css", "dart", "diff", "docker", "elixir", "elm",
+                  "erlang", "flow", "fortran", "f#", "gherkin", "glsl", "go", "graphql",
+                  "groovy", "haskell", "html", "java", "javascript", "json", "julia",
+                  "kotlin", "latex", "less", "lisp", "livescript", "lua", "makefile",
+                  "markdown", "markup", "matlab", "mermaid", "nix", "objective-c", "ocaml",
+                  "pascal", "perl", "php", "plain text", "powershell", "prolog",
+                  "protobuf", "python", "r", "reason", "ruby", "rust", "scala",
+                  "scss", "shell", "sql", "swift", "typescript", "vb.net", "verilog",
+                  "vhdl", "visual basic", "webassembly", "xml", "yaml", "java/c/c++/c#"
+                ]
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["code"],
+        "additionalProperties": false
+      },
+      "updateCalloutBlockRequest": {
+        "description": "Update a callout block.",
+        "type": "object",
+        "properties": {
+          "callout": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "icon": { "$ref": "#/components/schemas/blockIcon" },
+              "color": { "$ref": "#/components/schemas/blockColor" }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["callout"],
+        "additionalProperties": false
+      },
+      "updateQuoteBlockRequest": {
+        "description": "Update a quote block.",
+        "type": "object",
+        "properties": {
+          "quote": {
+            "type": "object",
+            "properties": {
+              "rich_text": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "color": { "$ref": "#/components/schemas/blockColor" }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["quote"],
+        "additionalProperties": false
+      },
+      "updateEquationBlockRequest": {
+        "description": "Update an equation block.",
+        "type": "object",
+        "properties": {
+          "equation": {
+            "type": "object",
+            "properties": {
+              "expression": {
+                "type": "string",
+                "description": "A KaTeX-compatible string representing the expression."
+              }
+            },
+            "required": ["expression"],
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["equation"],
+        "additionalProperties": false
+      },
+      "updateEmbedBlockRequest": {
+        "description": "Update an embed block.",
+        "type": "object",
+        "properties": {
+          "embed": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string", "description": "The URL to embed." },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["embed"],
+        "additionalProperties": false
+      },
+      "updateBookmarkBlockRequest": {
+        "description": "Update a bookmark block.",
+        "type": "object",
+        "properties": {
+          "bookmark": {
+            "type": "object",
+            "properties": {
+              "url": { "type": "string", "description": "The URL to bookmark." },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["bookmark"],
+        "additionalProperties": false
+      },
+      "updateImageBlockRequest": {
+        "description": "Update an image block. Supply either external (URL) or file_upload (Notion-hosted file).",
+        "type": "object",
+        "properties": {
+          "image": {
+            "type": "object",
+            "properties": {
+              "external": { "$ref": "#/components/schemas/blockExternalUrl" },
+              "file_upload": {
+                "description": "A Notion-hosted file upload to use as the image source.",
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string", "format": "uuid" }
+                },
+                "required": ["id"],
+                "additionalProperties": false
+              },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["image"],
+        "additionalProperties": false
+      },
+      "updateVideoBlockRequest": {
+        "description": "Update a video block. Supply either external (URL) or file_upload (Notion-hosted file).",
+        "type": "object",
+        "properties": {
+          "video": {
+            "type": "object",
+            "properties": {
+              "external": { "$ref": "#/components/schemas/blockExternalUrl" },
+              "file_upload": {
+                "description": "A Notion-hosted file upload to use as the video source.",
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string", "format": "uuid" }
+                },
+                "required": ["id"],
+                "additionalProperties": false
+              },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["video"],
+        "additionalProperties": false
+      },
+      "updateFileBlockRequest": {
+        "description": "Update a file block. Supply either external (URL) or file_upload (Notion-hosted file).",
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "object",
+            "properties": {
+              "external": { "$ref": "#/components/schemas/blockExternalUrl" },
+              "file_upload": {
+                "description": "A Notion-hosted file upload to use as the file source.",
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string", "format": "uuid" }
+                },
+                "required": ["id"],
+                "additionalProperties": false
+              },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              },
+              "name": { "type": "string", "description": "The display name of the file." }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["file"],
+        "additionalProperties": false
+      },
+      "updatePdfBlockRequest": {
+        "description": "Update a PDF block. Supply either external (URL) or file_upload (Notion-hosted file).",
+        "type": "object",
+        "properties": {
+          "pdf": {
+            "type": "object",
+            "properties": {
+              "external": { "$ref": "#/components/schemas/blockExternalUrl" },
+              "file_upload": {
+                "description": "A Notion-hosted file upload to use as the PDF source.",
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string", "format": "uuid" }
+                },
+                "required": ["id"],
+                "additionalProperties": false
+              },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["pdf"],
+        "additionalProperties": false
+      },
+      "updateAudioBlockRequest": {
+        "description": "Update an audio block. Supply either external (URL) or file_upload (Notion-hosted file).",
+        "type": "object",
+        "properties": {
+          "audio": {
+            "type": "object",
+            "properties": {
+              "external": { "$ref": "#/components/schemas/blockExternalUrl" },
+              "file_upload": {
+                "description": "A Notion-hosted file upload to use as the audio source.",
+                "type": "object",
+                "properties": {
+                  "id": { "type": "string", "format": "uuid" }
+                },
+                "required": ["id"],
+                "additionalProperties": false
+              },
+              "caption": {
+                "type": "array",
+                "items": { "$ref": "#/components/schemas/richTextRequest" },
+                "maxItems": 100
+              }
+            },
+            "additionalProperties": false
+          },
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["audio"],
+        "additionalProperties": false
+      },
+      "updateBlockArchivedRequest": {
+        "description": "Archive or restore a block without changing its content. Useful for block types not otherwise covered (divider, breadcrumb, column, table, etc.).",
+        "type": "object",
+        "properties": {
+          "archived": {
+            "type": "boolean",
+            "description": "Set to true to trash the block, false to restore it.",
+            "default": true
+          }
+        },
+        "required": ["archived"],
+        "additionalProperties": false
+      },
+      "updateBlockRequest": {
+        "description": "Request body for PATCH /v1/blocks/{block_id}. Send exactly one block-type key matching the block's current type, plus an optional archived flag. Use updateBlockArchivedRequest to archive/restore without changing content.",
+        "oneOf": [
+          { "$ref": "#/components/schemas/updateParagraphBlockRequest" },
+          { "$ref": "#/components/schemas/updateHeading1BlockRequest" },
+          { "$ref": "#/components/schemas/updateHeading2BlockRequest" },
+          { "$ref": "#/components/schemas/updateHeading3BlockRequest" },
+          { "$ref": "#/components/schemas/updateHeading4BlockRequest" },
+          { "$ref": "#/components/schemas/updateBulletedListItemBlockRequest" },
+          { "$ref": "#/components/schemas/updateNumberedListItemBlockRequest" },
+          { "$ref": "#/components/schemas/updateToDoBlockRequest" },
+          { "$ref": "#/components/schemas/updateToggleBlockRequest" },
+          { "$ref": "#/components/schemas/updateCodeBlockRequest" },
+          { "$ref": "#/components/schemas/updateCalloutBlockRequest" },
+          { "$ref": "#/components/schemas/updateQuoteBlockRequest" },
+          { "$ref": "#/components/schemas/updateEquationBlockRequest" },
+          { "$ref": "#/components/schemas/updateEmbedBlockRequest" },
+          { "$ref": "#/components/schemas/updateBookmarkBlockRequest" },
+          { "$ref": "#/components/schemas/updateImageBlockRequest" },
+          { "$ref": "#/components/schemas/updateVideoBlockRequest" },
+          { "$ref": "#/components/schemas/updateFileBlockRequest" },
+          { "$ref": "#/components/schemas/updatePdfBlockRequest" },
+          { "$ref": "#/components/schemas/updateAudioBlockRequest" },
+          { "$ref": "#/components/schemas/updateBlockArchivedRequest" }
+        ]
       }
     }
   },
@@ -900,19 +1576,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "object",
-                    "description": "The [block object `type`](ref:block#block-object-keys) value with the properties to be updated. Currently only `text` (for supported block types) and `checked` (for `to_do` blocks) fields can be updated.",
-                    "properties": {}
-                  },
-                  "archived": {
-                    "type": "boolean",
-                    "description": "Set to true to archive (delete) a block. Set to false to un-archive (restore) a block.",
-                    "default": true
-                  }
-                }
+                "$ref": "#/components/schemas/updateBlockRequest"
               }
             }
           }
