@@ -909,8 +909,7 @@
                   },
                   "archived": {
                     "type": "boolean",
-                    "description": "Set to true to archive (delete) a block. Set to false to un-archive (restore) a block.",
-                    "default": true
+                    "description": "Set to true to archive (delete) a block. Set to false to un-archive (restore) a block. If omitted, the block's archive state is left unchanged."
                   }
                 }
               }
